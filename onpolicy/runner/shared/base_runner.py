@@ -51,8 +51,8 @@ class Runner(object):
         self.model_dir = self.all_args.model_dir
 
         if self.use_wandb:
-            self.save_dir = str(wandb.run.dir)
-            self.run_dir = str(wandb.run.dir)
+            self.save_dir = "./results/MPE/simple_spread/rmappo/check/wandb/latest-run"
+            self.run_dir = "./results/MPE/simple_spread/rmappo/check/wandb/latest-run"
         else:
             self.run_dir = config["run_dir"]
             self.log_dir = str(self.run_dir / 'logs')
@@ -62,6 +62,10 @@ class Runner(object):
             self.save_dir = str(self.run_dir / 'models')
             if not os.path.exists(self.save_dir):
                 os.makedirs(self.save_dir)
+
+        self.gif_dir = str('./results/MPE/simple_spread/rmappo')
+        if not os.path.exists(self.gif_dir):
+            os.makedirs(self.gif_dir)
 
         from onpolicy.algorithms.r_mappo.r_mappo import R_MAPPO as TrainAlgo
         from onpolicy.algorithms.r_mappo.algorithm.rMAPPOPolicy import R_MAPPOPolicy as Policy
